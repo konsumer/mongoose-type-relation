@@ -1,0 +1,33 @@
+{
+  "name": "mongoose-type-relation",
+  "version": "1.0.0",
+  "description": "A field-type for Mongoose schemas that allows easy relationships between models",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/konsumer/mongoose-type-relation.git"
+  },
+  "keywords": [
+    "mongoose",
+    "types",
+    "relation",
+    "schema"
+  ],
+  "author": "David Konsumer <konsumer@jetboystudio.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/konsumer/mongoose-type-relation/issues"
+  },
+  "homepage": "https://github.com/konsumer/mongoose-type-relation",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0",
+    "mockgoose": "^1.10.7"
+  },
+  "dependencies": {
+    "mongoose": "^3.8.x"
+  }
+}
