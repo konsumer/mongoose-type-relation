@@ -14,8 +14,10 @@ A field-type for Mongoose schemas that allows easy relationships between models.
 
 ## usage
 
+```javascript
 var mongoose = require('mongoose');
 require('mongoose-type-relation');
+```
 
 ### 1-to-many
 
