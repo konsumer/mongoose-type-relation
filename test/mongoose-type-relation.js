@@ -1,18 +1,18 @@
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
-require('../');
+var Relation = require('../');
 
 require('mockgoose')(mongoose);
 
 var UserSchema = new mongoose.Schema({
-    authored: [{type:mongoose.SchemaTypes.Relation, ref:'Post', field: 'authored', fieldref:'author'}],
-    edited: [{type:mongoose.SchemaTypes.Relation, ref:'Post', field: 'edited', fieldref:'editors'}]
+    authored: [{type:Relation, ref:'Post', fieldref:'author'}],
+    edited: [{type:Relation, ref:'Post', fieldref:'editors'}]
 });
 var User = mongoose.model('User', UserSchema);
 
 var PostSchema = new mongoose.Schema({
-    author: {type:mongoose.SchemaTypes.Relation, ref:'User', field:'author'},
-    editors: [{type:mongoose.SchemaTypes.Relation, ref:'User', field:'editors'}]
+    author: {type:Relation, ref:'User', fieldref:'authored'},
+    editors: [{type:Relation, ref:'User', fieldref:'edited'}]
 });
 var Post = mongoose.model('Post', PostSchema);
 
@@ -32,7 +32,22 @@ describe('mongoose-type-relation', function(){
 		var editor2 = new User();
 		var editor3 = new User();
 		var post = new Post();
-		console.log(mongoose.SchemaTypes.Relation.relationships);
+		
+		post.author = author;
+		post.editors = [
+			editor1,
+			editor2,
+			editor3
+		];
+
+		post.save();
+		author.save();
+		editor1.save();
+		editor2.save();
+		editor3.save();
+
+		console.log(author);
+		console.log(post);
 	});
 
 	it('should allow a many-to-many relationship', function(){
