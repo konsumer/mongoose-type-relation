@@ -14,6 +14,7 @@
     "mongoose",
     "types",
     "relation",
+    "relationships",
     "schema"
   ],
   "author": "David Konsumer <konsumer@jetboystudio.com>",
@@ -28,6 +29,7 @@
     "mockgoose": "^1.10.7"
   },
   "dependencies": {
+    "inflection": "^1.5.3",
     "mongoose": "^3.8.x"
   }
 }
