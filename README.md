@@ -4,7 +4,7 @@ A field-type for Mongoose schemas that allows easy relationships between models.
 
 This field-type will populate external model references. If you update either side of the the relationship, it will update it on both.
 
-[![npm](https://www.npmjs.com/package/mongoose-type-relation)](https://nodei.co/npm/mongoose-type-relation.png)
+[![npm](https://nodei.co/npm/mongoose-type-relation.png)](https://www.npmjs.com/package/mongoose-type-relation)
 [![Build Status](https://travis-ci.org/konsumer/mongoose-type-relation.svg?branch=master)](https://travis-ci.org/konsumer/mongoose-type-relation)
 [![Code Climate](https://codeclimate.com/github/konsumer/mongoose-type-relation/badges/gpa.svg)](https://codeclimate.com/github/konsumer/mongoose-type-relation)
 
