@@ -30,6 +30,7 @@ describe('mongoose-type-relation', function(){
 		var author = new User();
 		var post = new Post();
 		post.author = author;
+		
 		expect(author.authored).to.have.members([post._id]);
 		expect(post.author).to.equal(author._id);
 	});
@@ -39,6 +40,20 @@ describe('mongoose-type-relation', function(){
 		var editor2 = new User();
 		var post = new Post();
 		post.editors = [editor1, editor2];
+		
+		expect(post.editors).to.have.members([editor1._id, editor2._id]);
+		expect(editor1.edited).to.have.members([post._id]);
+		expect(editor2.edited).to.have.members([post._id]);
+	});
+
+	it('should allow just _id for manual-mode', function(){
+		var editor1 = new User();
+		var editor2 = new User();
+		var post = new Post();
+		post.editors = [editor1._id, editor2];
+		editor1.edited.push(post);
+		editor2.edited.push(post);
+		
 		expect(post.editors).to.have.members([editor1._id, editor2._id]);
 		expect(editor1.edited).to.have.members([post._id]);
 		expect(editor2.edited).to.have.members([post._id]);

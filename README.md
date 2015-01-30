@@ -38,15 +38,21 @@ var PostSchema = new mongoose.Schema({
 var Post = mongoose.model('Post', PostSchema);
 ```
 
-In this example, if you add Posts to `User.edited` or `User.authored`, they will be added to the Post's corresponding fields and vice-versa (set `Post.author` or `Post.editors`.)  You still need to save all the records involved. This field type doesn't save anythng.
+In this example, if you add Posts to `User.edited` or `User.authored`, they will be added to the Post's corresponding fields and vice-versa.  You still need to save all the records involved.
 
 You should always add relationships with the whole object:
 
 ```javascript
-var author = new User();
 var post = new Post();
+var author = new User();
+var editor1 = new User();
+var editor2 = new User();
+
 post.author = author;
+post.editors = [editor1, editor2];
 ```
+
+Using plain `_id` triggers "manual mode", meaning that you are manually managing the relationship (like standard mongoose `ObjectId`s.)
 
 Have a look at the tests for more examples.
 
