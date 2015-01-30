@@ -28,31 +28,19 @@ describe('mongoose-type-relation', function(){
 
 	it('should allow a 1-to-many relationship', function(){
 		var author = new User();
-		var editor1 = new User();
-		var editor2 = new User();
-		var editor3 = new User();
 		var post = new Post();
-		
 		post.author = author;
-		post.editors = [
-			editor1,
-			editor2,
-			editor3
-		];
-
-		post.save();
-		author.save();
-		editor1.save();
-		editor2.save();
-		editor3.save();
-
-		console.log(author);
-		console.log(post);
+		expect(author.authored).to.have.members([post._id]);
+		expect(post.author).to.equal(author._id);
 	});
 
 	it('should allow a many-to-many relationship', function(){
-	});
-
-	it('should allow a many-to-1 relationship', function(){
+		var editor1 = new User();
+		var editor2 = new User();
+		var post = new Post();
+		post.editors = [editor1, editor2];
+		expect(post.editors).to.have.members([editor1._id, editor2._id]);
+		expect(editor1.edited).to.have.members([post._id]);
+		expect(editor2.edited).to.have.members([post._id]);
 	});
 });

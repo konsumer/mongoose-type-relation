@@ -4,7 +4,7 @@
   "description": "A field-type for Mongoose schemas that allows easy relationships between models",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --bail"
   },
   "repository": {
     "type": "git",

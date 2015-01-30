@@ -1,11 +1,12 @@
-# INCOMPLETE: still working out ideas
-
 # mongoose-type-relation
 A field-type for Mongoose schemas that allows easy relationships between models.
 
 [![npm version](https://badge.fury.io/js/mongoose-type-relation.svg)](http://badge.fury.io/js/mongoose-type-relation)
 [![Build Status](https://travis-ci.org/konsumer/mongoose-type-relation.svg?branch=master)](https://travis-ci.org/konsumer/mongoose-type-relation)
 [![Code Climate](https://codeclimate.com/github/konsumer/mongoose-type-relation/badges/gpa.svg)](https://codeclimate.com/github/konsumer/mongoose-type-relation)
+
+This field-type will populate external model references. If you update either side of the the relationship, it will update it on both.
+
 
 ## installation
 
@@ -16,83 +17,39 @@ A field-type for Mongoose schemas that allows easy relationships between models.
 
 ```javascript
 var mongoose = require('mongoose');
-require('mongoose-type-relation');
+var Relation = require('mongoose-type-relation');
 ```
 
-### 1-to-many
+The module exports it's field-type, but also adds it to `mongoose.SchemaTypes` as `mongoose.SchemaTypes.Relation`, like other fieldtypes.
+
+### example
 
 ```javascript
 var UserSchema = new mongoose.Schema({
-    authored: [{type:mongoose.SchemaTypes.Relation, ref:'Post', fieldref: 'author'}]
-});
-```
-
-### many-to-1
-
-```javascript
-var PostSchema = new mongoose.Schema({
-    author: {type:mongoose.SchemaTypes.Relation, ref:'User'}
-});
-```
-
-### many-to-many
-
-```javascript
-var PostSchema = new mongoose.Schema({
-    author: {type:mongoose.SchemaTypes.Relation, ref:'User'},
-    editors: [{type:mongoose.SchemaTypes.Relation, ref:'User'}]
-});
-```
-
-### populate
-
-You can get records for all the first-level children with [`populate()`](http://mongoosejs.com/docs/populate.html)
-
-```javascript
-var UserSchema = new mongoose.Schema({
-    authored: [{type:mongoose.SchemaTypes.Relation, ref:'Post', fieldref: 'author'}],
-    edited: [{type:mongoose.SchemaTypes.Relation, ref:'Post', fieldref: 'editors'}]
+    authored: [{type:Relation, ref:'Post', fieldref: 'author'}],
+    edited: [{type:Relation, ref:'Post', fieldref:'editors'}]
 });
 var User = mongoose.model('User', UserSchema);
 
 var PostSchema = new mongoose.Schema({
-    author: {type:mongoose.SchemaTypes.Relation, ref:'User'},
-    editors: [{type:mongoose.SchemaTypes.Relation, ref:'User'}]
+    author: {type:Relation, ref:'User'},
+    editors: [{type:Relation, ref:'User'}]
 });
 var Post = mongoose.model('Post', PostSchema);
-
-var author = new User();
-var editor1 = new User();
-var editor2 = new User();
-var editor3 = new User();
-var post = new Post();
-
-// you can save with the full object or just the ID
-post.author.push(author1);
-post.editors.push(editor1._id);
-post.editors.push(editor2);
-post.editors.push(editor3._id);
-
-Promise.all([
-    author.save(),
-    editor1.save(),
-    editor2.save(),
-    editor3.save(),
-    post.save()
-]).then(function(){
-    Post
-        .find({})
-        .populate()
-        .then(function(posts){
-            console.log(posts);
-        });
-    
-    User
-        .find({})
-        .populate()
-        .then(function(users){
-            console.log(users);
-        });
-});
-
 ```
+
+In this example, if you add Posts to `User.edited` or `User.authored`, they will be added to the Post's corresponding fields and vice-versa (set `Post.author` or `Post.editors`.)  You still need to save all the records involved. This field type doesn't save anythng.
+
+You should always add relationships with the whole object:
+
+```javascript
+var author = new User();
+var post = new Post();
+post.author = author;
+```
+
+Have a look at the tests for more examples.
+
+### populate
+
+Since ths uses standard mongoose references over `ObjectId`s, you can fill record's children with [`populate()`](http://mongoosejs.com/docs/populate.html).
