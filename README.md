@@ -1,17 +1,12 @@
 # mongoose-type-relation
-A field-type for Mongoose schemas that allows easy relationships between models.
 
-[![npm version](https://badge.fury.io/js/mongoose-type-relation.svg)](http://badge.fury.io/js/mongoose-type-relation)
-[![Build Status](https://travis-ci.org/konsumer/mongoose-type-relation.svg?branch=master)](https://travis-ci.org/konsumer/mongoose-type-relation)
-[![Code Climate](https://codeclimate.com/github/konsumer/mongoose-type-relation/badges/gpa.svg)](https://codeclimate.com/github/konsumer/mongoose-type-relation)
+A field-type for Mongoose schemas that allows easy relationships between models.
 
 This field-type will populate external model references. If you update either side of the the relationship, it will update it on both.
 
-
-## installation
-
-    npm install mongoose-type-relation
-
+[![npm](https://www.npmjs.com/package/mongoose-type-relation)](https://nodei.co/npm/mongoose-type-relation.png)
+[![Build Status](https://travis-ci.org/konsumer/mongoose-type-relation.svg?branch=master)](https://travis-ci.org/konsumer/mongoose-type-relation)
+[![Code Climate](https://codeclimate.com/github/konsumer/mongoose-type-relation/badges/gpa.svg)](https://codeclimate.com/github/konsumer/mongoose-type-relation)
 
 ## usage
 
