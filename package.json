@@ -1,6 +1,6 @@
 {
   "name": "mongoose-type-relation",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A field-type for Mongoose schemas that allows easy relationships between models",
   "main": "index.js",
   "scripts": {
@@ -26,10 +26,10 @@
   "devDependencies": {
     "chai": "^1.10.0",
     "mocha": "^2.1.0",
-    "mockgoose": "^1.10.7"
+    "mockgoose": ""
   },
   "dependencies": {
     "inflection": "^1.5.3",
-    "mongoose": "^3.8.x"
+    "mongoose": ""
   }
 }
